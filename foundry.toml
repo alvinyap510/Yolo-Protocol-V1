@@ -2,5 +2,10 @@
 src = "src"
 out = "out"
 libs = ["lib"]
+remappings = [
+    "@layerzerolabs=node_modules/@layerzerolabs/solidity-examples/",
+    "@openzeppelin=node_modules/@openzeppelin/",
+    "@yolo/contracts=src/"
+]
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

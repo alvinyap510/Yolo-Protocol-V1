@@ -1,3 +1,7 @@
+# Developer specific files
+.DS_Store
+references
+
 # Compiler files
 cache/
 out/
@@ -12,3 +16,5 @@ docs/
 
 # Dotenv file
 .env
+
+node_modules/

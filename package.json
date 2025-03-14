@@ -1,0 +1,6 @@
+{
+	"dependencies": {
+		"@layerzerolabs/solidity-examples": "^1.1.0",
+		"@openzeppelin/contracts": "^4.9.6"
+	}
+}
