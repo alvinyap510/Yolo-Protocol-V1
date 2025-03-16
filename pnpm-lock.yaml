@@ -14,6 +14,9 @@ importers:
       '@openzeppelin/contracts':
         specifier: ^4.9.6
         version: 4.9.6
+      '@openzeppelin/contracts-upgradeable':
+        specifier: ^5.2.0
+        version: 5.2.0(@openzeppelin/contracts@4.9.6)
 
 packages:
 
@@ -291,6 +294,11 @@ packages:
 
   '@openzeppelin/contracts-upgradeable@4.9.6':
     resolution: {integrity: sha512-m4iHazOsOCv1DgM7eD7GupTJ+NFVujRZt1wzddDPSVGpWdKq1SKkla5htKG7+IS4d2XOCtzkUNwRZ7Vq5aEUMA==}
+
+  '@openzeppelin/contracts-upgradeable@5.2.0':
+    resolution: {integrity: sha512-mZIu9oa4tQTlGiOJHk6D3LdJlqFqF6oNOSn6S6UVJtzfs9UsY9/dhMEbAVTwElxUtJnjpf6yA062+oBp+eOyPg==}
+    peerDependencies:
+      '@openzeppelin/contracts': 5.2.0
 
   '@openzeppelin/contracts@3.4.2':
     resolution: {integrity: sha512-z0zMCjyhhp4y7XKAcDAi3Vgms4T2PstwBdahiO0+9NaGICQKjynK3wduSRplTgk4LXmoO1yfDGO5RbjKYxtuxA==}
@@ -2302,6 +2310,10 @@ snapshots:
   '@openzeppelin/contracts-upgradeable@3.4.2-solc-0.7': {}
 
   '@openzeppelin/contracts-upgradeable@4.9.6': {}
+
+  '@openzeppelin/contracts-upgradeable@5.2.0(@openzeppelin/contracts@4.9.6)':
+    dependencies:
+      '@openzeppelin/contracts': 4.9.6
 
   '@openzeppelin/contracts@3.4.2': {}
 
