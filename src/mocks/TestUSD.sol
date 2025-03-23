@@ -12,7 +12,7 @@ contract TestUSD is ERC20, Ownable {
         _;
     }
 
-    constructor() ERC20("TestUSD", "TUSD") Ownable(msg.sender) {}
+    constructor() ERC20("TestUSD", "TUSD") Ownable() {}
 
     function setCauldron(address _cauldron) external onlyOwner {
         require(cauldron == address(0), "Cauldron already set");
