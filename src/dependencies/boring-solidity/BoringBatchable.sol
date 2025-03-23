@@ -9,14 +9,14 @@ pragma experimental ABIEncoderV2;
 // Combining BoringBatchable with msg.value can cause double spending issues
 // https://www.paradigm.xyz/2021/08/two-rights-might-make-a-wrong/
 
-import "./interfaces/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract BaseBoringBatchable {
     error BatchError(bytes innerError);
 
     /// @dev Helper function to extract a useful revert message from a failed call.
     /// If the returned data is malformed or not correctly abi encoded then this call can fail itself.
-    function _getRevertMsg(bytes memory _returnData) internal pure{
+    function _getRevertMsg(bytes memory _returnData) internal pure {
         // If the _res length is less than 68, then
         // the transaction failed with custom error or silently (without a revert message)
         if (_returnData.length < 68) revert BatchError(_returnData);
