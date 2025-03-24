@@ -2,6 +2,9 @@
 pragma solidity >=0.8.28;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@yolo/contracts/interfaces/IFlashBorrower.sol";
+import "@yolo/contracts/interfaces/IStrategy.sol";
+import {Rebase} from "@BoringSolidity/RebaseLibrary.sol";
 
 interface IYoloBox {
     function balanceOf(IERC20, address) external view returns (uint256);
@@ -12,7 +15,7 @@ interface IYoloBox {
         returns (bool[] memory successes, bytes[] memory results);
 
     function batchFlashLoan(
-        IBatchFlashBorrower borrower,
+        IFlashBorrower borrower,
         address[] calldata receivers,
         IERC20[] calldata tokens,
         uint256[] calldata amounts,
