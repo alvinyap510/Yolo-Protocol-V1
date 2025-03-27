@@ -978,7 +978,7 @@ contract YoloVault is Ownable, IMasterContract {
         );
 
         // Calculate users debt value in the borrowed asset
-        uint256 debtValue = borrowPart * _exchangeRate / _totalBorrow.base;
+        uint256 debtValue = borrowPart * _totalBorrow.elastic * _exchangeRate / _totalBorrow.base;
 
         return collateralValue >= debtValue;
     }
