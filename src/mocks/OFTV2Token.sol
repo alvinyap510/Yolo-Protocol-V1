@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
-import "@layerzerolabs/contracts/token/oft/v2/OFTV2.sol";
+// import "@layerzerolabs/contracts/token/oft/v2/OFTV2.sol";
+import {OFT} from "@layerzerolabs/oft-evm/contracts/OFT.sol";
 
-contract OFTV2Token is OFTV2 {
+contract OFTV2Token is OFT {
     constructor(string memory _name, string memory _symbol, address _lzEndpoint)
-        OFTV2(_name, _symbol, 18, _lzEndpoint)
+        OFT(_name, _symbol, _lzEndpoint, msg.sender)
     {
-        _mint(msg.sender, 1000000 * 10 ** 18);
+        _mint(msg.sender, 1_000_000 * 10 ** 18);
     }
 }
