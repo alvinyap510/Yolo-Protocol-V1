@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
-import {OFT} from "@layerzerolabs/oft-evm/contracts/OFT.sol";
+import "@layerzerolabs/oft-evm/contracts/OFT.sol";
+import {
+    MessagingReceipt, OFTReceipt, MessagingFee, SendParam
+} from "@layerzerolabs/oft-evm/contracts/interfaces/IOFT.sol";
 
 contract OFTV2Token is OFT {
     constructor(string memory _name, string memory _symbol, address _lzEndpoint)
@@ -39,13 +42,13 @@ contract OFTV2Token is OFT {
         });
 
         // Estimate the messaging fee
-        MessagingFee memory fee = quoteSend(sendParam, false); // Pay in native token, not ZRO
+        MessagingFee memory fee = this.quoteSend(sendParam, false); // Pay in native token, not ZRO
 
         // Ensure enough native token is provided to cover the fee
         require(msg.value >= fee.nativeFee, "Insufficient native fee provided");
 
         // Execute the send operation
-        (msgReceipt, oftReceipt) = send(sendParam, fee, msg.sender);
+        (msgReceipt, oftReceipt) = this.send(sendParam, fee, msg.sender);
 
         // Refund excess native token if any
         if (msg.value > fee.nativeFee) {
@@ -71,6 +74,6 @@ contract OFTV2Token is OFT {
             composeMsg: "", // No composed message for a simple transfer
             oftCmd: "" // No custom OFT command
         });
-        return quoteSend(sendParam, false);
+        return this.quoteSend(sendParam, false);
     }
 }
