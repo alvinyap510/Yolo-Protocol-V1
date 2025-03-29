@@ -48,7 +48,7 @@ contract OFTV2Token is OFT {
         require(msg.value >= fee.nativeFee, "Insufficient native fee provided");
 
         // Execute the send operation
-        (msgReceipt, oftReceipt) = this.send(sendParam, fee, msg.sender);
+        (msgReceipt, oftReceipt) = this.send{value: fee.nativeFee}(sendParam, fee, msg.sender);
 
         // Refund excess native token if any
         if (msg.value > fee.nativeFee) {
