@@ -186,24 +186,27 @@ contract TimeLock {
      * @notice  Schedules a transaction.
      * @dev     Can only be called by an admin.
      * @param   _target      The target address for the transaction.
-     * @param   value       The ether value (in wei) to be transferred.
-     * @param   signature   The function signature to be called.
-     * @param   data        The calldata to be passed.
-     * @param   eta         The scheduled time for the transaction to execute.
+     * @param   _value       The ether value (in wei) to be transferred.
+     * @param   _signature   The function signature to be called.
+     * @param   _data        The calldata to be passed.
+     * @param   _eta         The scheduled time for the transaction to execute.
      * @return  txHash      The hash of the scheduled transaction.
      */
-    function queueTransaction(address _target, uint256 value, string memory signature, bytes memory data, uint256 eta)
-        public
-        returns (bytes32)
-    {
+    function queueTransaction(
+        address _target,
+        uint256 _value,
+        string memory _signature,
+        bytes memory _data,
+        uint256 _eta
+    ) public returns (bytes32) {
         // Guard Clause
         if (!isAdmin[msg.sender]) revert ErrorCallerNotAdmin();
-        if (eta < getBlockTimestamp() + delayTime) revert ErrorInvalidEta(eta, getBlockTimestamp() + delayTime);
+        if (_eta < getBlockTimestamp() + delayTime) revert ErrorInvalidEta(_eta, getBlockTimestamp() + delayTime);
 
-        bytes32 txHash = keccak256(abi.encode(_target, value, signature, data, eta));
+        bytes32 txHash = keccak256(abi.encode(_target, _value, _signature, _data, _eta));
         queuedTransactions[txHash] = true;
 
-        emit QueueTransaction(txHash, _target, value, signature, data, eta);
+        emit QueueTransaction(txHash, _target, _value, _signature, _data, _eta);
         return txHash;
     }
 
@@ -286,6 +289,7 @@ contract TimeLock {
     function transferEther(address payable _to, uint256 _amount) public {
         // Guard Clause
         if (!isAdmin[msg.sender]) revert ErrorCallerNotAdmin();
+        if (address(this).balance < _amount) revert ErrorInsufficientEther(address(this).balance, _amount);
 
         (bool success,) = _to.call{value: _amount}("");
         if (!success) revert ErrorEtherTransferFailed();
